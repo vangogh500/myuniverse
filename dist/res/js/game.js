@@ -2049,6 +2049,7 @@ $c_sr_IntRef.prototype.$classData = $d_sr_IntRef;
 function $c_Lcom_github_vangogh500_myuni_Main$() {
   $c_O.call(this);
   this.c$1 = null;
+  this.gl$1 = null;
   this.executionStart$1 = $m_sjsr_RuntimeLong$().Zero__sjsr_RuntimeLong();
   this.scala$App$$$undargs$1 = null;
   this.scala$App$$initCode$1 = null
@@ -2069,6 +2070,9 @@ $c_Lcom_github_vangogh500_myuni_Main$.prototype.init___ = (function() {
 });
 $c_Lcom_github_vangogh500_myuni_Main$.prototype.delayedEndpoint$com$github$vangogh500$myuni$Main$1__V = (function() {
   this.c$1 = $m_Lcom_github_vangogh500_myuni_facades_dom_Canvas$().apply__I__I__Lorg_scalajs_dom_raw_HTMLCanvasElement(1600, 900);
+  this.gl$1 = this.c$1.getContext("webgl");
+  this.gl$1.clearColor(0.0, 0.0, 0.0, 1.0);
+  this.gl$1.clear(this.gl$1.COLOR_BUFFER_BIT);
   $m_Lorg_scalajs_dom_package$().document__Lorg_scalajs_dom_raw_HTMLDocument().getElementById("app").appendChild(this.c$1)
 });
 $c_Lcom_github_vangogh500_myuni_Main$.prototype.main__AT__V = (function(args) {
