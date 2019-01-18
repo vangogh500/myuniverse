@@ -5,6 +5,7 @@
 package com.github.vangogh500.myuni_client
 
 import facades.electron._
+import data.Store
 
 /**
  * Client
@@ -21,6 +22,7 @@ object Client {
         frame = false
       )
       win.loadFile("./res/index.html")
+      println(Store.config)
     })
     App.on("window-all-closed", () => App.quit())
   }

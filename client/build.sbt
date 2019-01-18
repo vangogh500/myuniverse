@@ -5,6 +5,7 @@ enablePlugins(ScalaJSPlugin)
 enablePlugins(ScalaJSBundlerPlugin)
 
 scalaJSUseMainModuleInitializer := true
+scalacOptions += "-P:scalajs:sjsDefinedByDefault"
 
 npmDependencies in Compile ++= Seq(
   "electron" -> "3.0.10"

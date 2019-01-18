@@ -8,13 +8,15 @@ package electron
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
-import nodejs._
 
 /**
  * Options used for constructing a BrowserWindow
  */
-@ScalaJSDefined
 trait BrowserWindowOptions extends js.Object {
+  /**
+   * Window visibility
+   */
+  val show: js.UndefOr[Boolean]
   /**
    * Width of window
    */
@@ -31,6 +33,10 @@ trait BrowserWindowOptions extends js.Object {
    * Window title bar style (mac OS only)
    */
   val titleBarStyle: js.UndefOr[String]
+  /**
+   * Full screen mode
+   */
+  val fullscreen: js.UndefOr[Boolean]
 }
 
 /**
@@ -45,14 +51,18 @@ object BrowserWindowOptions {
    * @param tbs Window title bar style (mac OS only)
    */
   def apply(
+    sw: js.UndefOr[Boolean],
     w: js.UndefOr[Int],
     h: js.UndefOr[Int],
     f: js.UndefOr[Boolean],
-    tbs: js.UndefOr[String]
+    tbs: js.UndefOr[String],
+    fs: js.UndefOr[Boolean],
   ) = new BrowserWindowOptions {
+    val show = sw
     val width = w
     val height = h
     val frame = f
     val titleBarStyle = tbs
+    val fullscreen = fs
   }
 }

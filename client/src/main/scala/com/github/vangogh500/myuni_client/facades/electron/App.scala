@@ -20,4 +20,8 @@ object App extends EventEmitter {
    * Quit electron
    */
   def quit(): Unit = js.native
+  /**
+   * Get path to file or directory associated with name
+   */
+  def getPath(name: String): String = js.native
 }
