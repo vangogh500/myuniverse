@@ -1,5 +1,8 @@
 .sass-cache
 target/
 node_modules/
-dist/client.js
-dist/client.js.map
+
+dist/app.js
+dist/app.js.map
+dist/res/js/renderer.js
+dist/res/js/renderer.js.map

@@ -1,7 +1,7 @@
 {
   "name": "myuniverse",
   "version": "0.1.0",
-  "main": "./client.js",
+  "main": "./app.js",
   "dependencies": {
     "pixi.js": "^4.8.5"
   }
