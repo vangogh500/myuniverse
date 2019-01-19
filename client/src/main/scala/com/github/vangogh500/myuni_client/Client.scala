@@ -4,6 +4,7 @@
  */
 package com.github.vangogh500.myuni_client
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import facades.electron._
 import data.Store
 
@@ -16,13 +17,18 @@ object Client {
    */
   def main(args: Array[String]): Unit = {
     App.on("ready", () => {
-      val win = BrowserWindow(
-        width = 1600,
-        height = 900,
-        frame = false
-      )
-      win.loadFile("./res/index.html")
-      println(Store.config)
+      Store.load() map { store =>
+        val win = BrowserWindow(
+          fullscreen = store.config.screen.fullscreen,
+          width = store.config.screen.resolution.width,
+          height = store.config.screen.resolution.height,
+          frame = false,
+          show = false
+        )
+        win.loadFile("./res/index.html")
+        win.on("ready-to-show", () => win.show())
+        win.on("closed", () => App.quit())
+      }
     })
     App.on("window-all-closed", () => App.quit())
   }

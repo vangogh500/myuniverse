@@ -5,7 +5,9 @@
 package com.github.vangogh500.myuni_client
 package data
 
-import facades.electron.Screen
+import scala.concurrent.{Future, ExecutionContext}
+import facades.nodejs.{Path, FS}
+import facades.electron.{App, Screen}
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
 
@@ -59,7 +61,24 @@ trait Preferences extends js.Object {
  * Preferences
  */
 object Preferences {
+  /**
+   * Default preferences
+   */
   def default: Preferences = new Preferences {
     val screen = ScreenPreferences.default
+  }
+  /**
+   * Load preferences
+   */
+  def load()(implicit ec: ExecutionContext): Future[Preferences] = {
+    val path = Path.join(App.getPath("userData"), "config.json")
+    if(FS.existsSync(path)) {
+      FS.readFile(path) map { data =>
+        js.JSON.parse(data.toString()).asInstanceOf[Preferences]
+      }
+    } else {
+      val config = Preferences.default
+      FS.writeFile(path, js.JSON.stringify(value = config, space = "\t")) map { _ => config }
+    }
   }
 }

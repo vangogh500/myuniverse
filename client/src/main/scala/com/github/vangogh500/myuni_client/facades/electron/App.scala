@@ -8,7 +8,7 @@ package electron
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
-import nodejs._
+import nodejs.EventEmitter
 
 /**
  * Electron App

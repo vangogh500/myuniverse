@@ -8,7 +8,7 @@ package electron
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
-import nodejs._
+import nodejs.EventEmitter
 
 /**
  * Browser window
@@ -17,7 +17,7 @@ import nodejs._
  */
 @js.native
 @JSImport("electron", "BrowserWindow")
-class BrowserWindow(args: BrowserWindowOptions) extends js.Object {
+class BrowserWindow(args: BrowserWindowOptions) extends EventEmitter {
   /**
    * Web contents
    */
@@ -31,6 +31,10 @@ class BrowserWindow(args: BrowserWindowOptions) extends js.Object {
    * Bounds of the window
    */
   def getBounds(): Rectangle = js.native
+  /**
+   * Show window if hidden
+   */
+  def show(): Unit = js.native
 }
 
 /**
