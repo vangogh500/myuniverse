@@ -33,11 +33,30 @@ object ResolutionPreferences {
 }
 
 /**
+ * Advanced screen preferences
+ */
+trait AdvancedScreenPreferences extends js.Object {
+  val fpsCap: Int
+}
+
+/**
+ * Advanced screen preferences
+ */
+object AdvancedScreenPreferences {
+  def default: AdvancedScreenPreferences = new AdvancedScreenPreferences {
+    val fpsCap = 60
+  }
+}
+
+
+
+/**
  * Screen Preferences
  */
 trait ScreenPreferences extends js.Object {
   val fullscreen: Boolean
   val resolution: ResolutionPreferences
+  val advanced: AdvancedScreenPreferences
 }
 
 /**
@@ -47,6 +66,7 @@ object ScreenPreferences {
   def default: ScreenPreferences = new ScreenPreferences {
     val fullscreen = true
     val resolution = ResolutionPreferences.default
+    val advanced = AdvancedScreenPreferences.default
   }
 }
 

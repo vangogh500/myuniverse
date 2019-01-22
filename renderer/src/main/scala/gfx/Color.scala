@@ -79,10 +79,6 @@ object Color {
    */
   def apply(r: Int, g: Int, b: Int): Color = Color(r, g, b, 1)
   /**
-   * Create a color from rgba
-   */
-  def apply(r: Int, g: Int, b: Int, a: Int): Color = Color(r, g, b, a)
-  /**
    * Black color
    */
   val Black = Color(0,0,0)
