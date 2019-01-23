@@ -18,11 +18,27 @@ import org.scalajs.dom.html.{Canvas}
  * @param ctx Web2d context on txt canvas
  */
 case class Screen(gl: WebGLRenderingContext, ctx: CanvasRenderingContext2D) {
+  def width: Int = gl.canvas.width
+  def height: Int = gl.canvas.height
   def clear(): Unit = {
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height)
   }
-  def fillText(txt: String, x: Int, y: Int): Unit = {
+  def fillTextLeft(txt: String, x: Int, y: Int): Unit = {
+    ctx.textAlign = "left"
     ctx.fillText(txt, x, y)
+  }
+  def fillTextRight(txt: String, x: Int, y: Int): Unit = {
+    ctx.textAlign = "right"
+    ctx.fillText(txt, x, y)
+  }
+  def resize(): Unit = {
+    gl.canvas.width = gl.canvas.clientWidth
+    gl.canvas.height = gl.canvas.clientHeight
+    ctx.canvas.width = ctx.canvas.clientWidth
+    ctx.canvas.height = ctx.canvas.clientHeight
+    ctx.textBaseline = "top"
+    ctx.fillStyle = "white"
+    ctx.font = "24px VT323"
   }
 }
 
@@ -36,15 +52,8 @@ object Screen {
   def load(): Screen = {
     val gl = document.getElementById("canvas").asInstanceOf[Canvas].getContext("webgl").asInstanceOf[WebGLRenderingContext]
     val ctx = document.getElementById("text").asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
-    // fix aspect ratio
-    gl.canvas.width = gl.canvas.clientWidth
-    gl.canvas.height = gl.canvas.clientHeight
-    ctx.canvas.width = ctx.canvas.clientWidth
-    ctx.canvas.height = ctx.canvas.clientHeight
-    // text settings
-    ctx.textBaseline = "top"
-    ctx.fillStyle = "white"
-    ctx.font = "24px VT323"
-    Screen(gl, ctx)
+    val s = Screen(gl, ctx)
+    s.resize()
+    s
   }
 }

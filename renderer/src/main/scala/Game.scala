@@ -3,24 +3,31 @@ package com.github.vangogh500.myuni.renderer
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global
 import gfx.Screen
+import input.Keyboard
 
 /**
  * Game
  */
-case class Game()(implicit sc: Screen) {
-  val stats = GameStats()
+case class Game(state: GameState)(implicit sc: Screen, keys: Keyboard) {
+  /**
+   * Keydown event
+   * @param keyCode key code
+   */
+  private def onKeyDown(keyCode: Int): Unit = {
+    state.onKeyDown(keyCode)
+  }
   /**
    * Update game state
    */
-  def update(dt: Int): Unit = {
-    stats.update(dt)
+  private def update(dt: Int): Unit = {
+    state.update(dt)
   }
   /**
    * Render game to screen
    */
-  def render(): Unit = {
+  private def render(): Unit = {
     sc.clear()
-    stats.render()
+    state.render()
   }
   /**
    * Game loop
@@ -42,6 +49,7 @@ case class Game()(implicit sc: Screen) {
    * Start game
    */
   def start(): Unit = {
+    keys.onKeyDown(onKeyDown)
     loop(js.Date.now().toLong)()
   }
 }
@@ -51,6 +59,6 @@ case class Game()(implicit sc: Screen) {
  */
 object Game {
   def init(): Game = {
-    Game()(Screen.load())
+    Game(GameState())(Screen.load(), Keyboard.load())
   }
 }
