@@ -8,6 +8,8 @@ import gfx.Screen
 case class GameState() {
   /** Whether to show debug */
   var debug = false
+  /
+  var loading = false
   /** FPS */
   var fps: Int = 0
   /**
@@ -32,5 +34,8 @@ case class GameState() {
     if(debug) {
       sc.fillTextRight("fps: " + fps, sc.width - 10, 10)
     }
+  }
+  def init(): Unit = {
+
   }
 }
