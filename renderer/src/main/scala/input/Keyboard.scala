@@ -7,14 +7,10 @@ import scala.scalajs.js.Dynamic.global
 /**
  * Keyboard
  */
-case class Keyboard() {
+object Keyboard {
   def onKeyDown(fn: Int => Unit): Unit = {
     global.addEventListener("keydown", (e: dom.KeyboardEvent) => {
       fn(e.keyCode)
     })
   }
-}
-
-object Keyboard {
-  def load(): Keyboard = Keyboard()
 }

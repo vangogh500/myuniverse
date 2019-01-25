@@ -17,7 +17,7 @@ import com.github.vangogh500.myuni.core.facades.nodejs.Error
  */
 @js.native
 @JSImport("three", "FileLoader")
-class NativeFileLoader() extends js.Object {
+class NativeFileLoader(manager: LoadingManager) extends js.Object {
   def load(path: String,
     onLoad: js.Function1[js.Object, Unit],
     onProgress: js.Function1[XMLHttpRequest, Unit],
@@ -44,5 +44,5 @@ class FileLoader(native: NativeFileLoader) {
  * File loader
  */
 object FileLoader {
-  def apply(): FileLoader = new FileLoader(new NativeFileLoader())
+  def apply(manager: LoadingManager): FileLoader = new FileLoader(new NativeFileLoader(manager))
 }

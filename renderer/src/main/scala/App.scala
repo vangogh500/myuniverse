@@ -4,30 +4,39 @@ import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global
 import gfx.Screen
 import input.Keyboard
+import facades.three.{Scene, LoadingManager, OrthographicCamera}
+import org.scalajs.dom.{document, window}
 
 /**
- * Game
+ * App
  */
-case class Game(state: GameState)(implicit sc: Screen, keys: Keyboard) {
+class App() {
+  val screen = Screen.init()
+  val manager = new LoadingManager()
+  var fps = 0
+  var debug = false
   /**
    * Keydown event
    * @param keyCode key code
    */
-  private def onKeyDown(keyCode: Int): Unit = {
-    state.onKeyDown(keyCode)
+  def onKeyDown(keyCode: Int): Unit = {
+    keyCode match {
+      case 114 => debug = !debug
+      case _ =>
+    }
   }
   /**
-   * Update game state
+   * Update state
+   * @param dt Change in time
    */
-  private def update(dt: Int): Unit = {
-    state.update(dt)
+  def update(dt: Int): Unit = {
+    fps = 1000/dt
   }
   /**
-   * Render game to screen
+   * Render app
    */
-  private def render(): Unit = {
-    sc.clear()
-    state.render()
+  def render(): Unit = {
+    screen.render()
   }
   /**
    * Game loop
@@ -46,19 +55,14 @@ case class Game(state: GameState)(implicit sc: Screen, keys: Keyboard) {
     }
   }
   /**
-   * Start game
+   * Start container
    */
   def start(): Unit = {
-    keys.onKeyDown(onKeyDown)
+    Keyboard.onKeyDown(onKeyDown)
     loop(js.Date.now().toLong)()
   }
 }
 
-/**
- * Game
- */
-object Game {
-  def init(): Game = {
-    Game(GameState())(Screen.load(), Keyboard.load())
-  }
+object App {
+  def init(): App = new App()
 }

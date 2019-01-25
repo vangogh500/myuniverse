@@ -13,7 +13,7 @@ import com.github.vangogh500.myuni.core.facades.nodejs.Error
  */
 @js.native
 @JSImport("three", "FontLoader")
-class NativeFontLoader() extends js.Object {
+class NativeFontLoader(manager: LoadingManager) extends js.Object {
   def load(path: String,
     onLoad: js.Function1[js.Object, Unit],
     onProgress: js.Function1[XMLHttpRequest, Unit],
@@ -40,5 +40,5 @@ class FontLoader(native: NativeFontLoader) {
  * Font loader
  */
 object FontLoader {
-  def apply(): FontLoader = new FontLoader(new NativeFontLoader())
+  def apply(manager: LoadingManager): FontLoader = new FontLoader(new NativeFontLoader(manager))
 }

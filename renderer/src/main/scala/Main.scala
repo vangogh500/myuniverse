@@ -5,6 +5,6 @@ import facades.three.{FontLoader}
 
 object Main {
   def main(args: Array[String]): Unit = {
-    Game.init().start()
+    new App().start()
   }
 }
