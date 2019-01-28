@@ -10,5 +10,4 @@ import scala.scalajs.js.annotation.JSImport
  */
 @js.native
 @JSImport("three", "Scene")
-class Scene() extends js.Object {
-}
+class Scene() extends Object3D

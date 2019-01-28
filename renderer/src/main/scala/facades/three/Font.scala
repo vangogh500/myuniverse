@@ -6,9 +6,8 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
 /**
- * Object 3D
+ * Font
  */
 @js.native
-trait Object3D extends js.Object {
-  def add(o: Object3D): Unit = js.native
-}
+@JSImport("three", "Font")
+class Font(data: js.Object) extends js.Object

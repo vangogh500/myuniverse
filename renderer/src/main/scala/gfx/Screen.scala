@@ -6,26 +6,36 @@ package com.github.vangogh500.myuni.renderer
 package gfx
 
 import org.scalajs.dom.{document, window}
-import facades.three.{Scene, WebGLRenderer, OrthographicCamera, TextGeometry}
-
-case class Screen(scene: Scene, camera: OrthographicCamera, renderer: WebGLRenderer) {
-  def render(): Unit = {
-    renderer.render(scene, camera)
-  }
-}
+import org.scalajs.dom.CanvasRenderingContext2D
+import org.scalajs.dom.raw.WebGLRenderingContext
+import org.scalajs.dom.html.{Canvas}
 
 /**
  * Screen
  */
 object Screen {
-  def init(): Screen = {
-    val (w, h) = (window.innerWidth, window.innerHeight)
-    val renderer = new WebGLRenderer()
-    val scene = new Scene()
-    scene.add(new TextGeometry("HELLO WORLD"))
-    val camera = OrthographicCamera.d2(w, h)
-    renderer.setSize(w, h)
-    document.body.appendChild(renderer.domElement)
-    Screen(scene, camera, renderer)
+  def width = ctx.canvas.width
+  def height = ctx.canvas.height
+  private val gl = document.getElementById("canvas").asInstanceOf[Canvas].getContext("webgl").asInstanceOf[WebGLRenderingContext]
+  private val ctx = document.getElementById("text").asInstanceOf[Canvas].getContext("2d").asInstanceOf[CanvasRenderingContext2D]
+  def clear(): Unit = {
+    ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height)
+  }
+  def fillTextTopLeft(txt: String, x: Int, y: Int): Unit = {
+    ctx.textAlign = "left"
+    ctx.fillText(txt, x, y)
+  }
+  def fillTextTopRight(txt: String, x: Int, y: Int): Unit = {
+    ctx.textAlign = "right"
+    ctx.fillText(txt, width - x, y)
+  }
+  def resize(): Unit = {
+    gl.canvas.width = gl.canvas.clientWidth
+    gl.canvas.height = gl.canvas.clientHeight
+    ctx.canvas.width = ctx.canvas.clientWidth
+    ctx.canvas.height = ctx.canvas.clientHeight
+    ctx.textBaseline = "top"
+    ctx.fillStyle = "white"
+    ctx.font = "24px VT323"
   }
 }

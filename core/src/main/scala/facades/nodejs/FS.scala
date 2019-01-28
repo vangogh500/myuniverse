@@ -16,6 +16,7 @@ import scala.scalajs.js.annotation.JSImport
 @js.native
 @JSImport("fs", JSImport.Namespace)
 object NativeFS extends js.Object {
+  def readFileSync(path: String, encoding: String): String = js.native
   def readFile(path: String, callback: js.Function2[Error, Buffer, Unit]): Unit = js.native
   def existsSync(path: String): Boolean = js.native
   def writeFile(path: String, data: String, callback: js.Function1[Error, Unit]): Unit = js.native
@@ -26,6 +27,7 @@ object NativeFS extends js.Object {
  * FS
  */
 object FS {
+  def readFileSync(path: String, encoding: String): String = NativeFS.readFileSync(path, encoding)
   /**
    * Asynchronously reads the entire contents of a file
    * @param path file path

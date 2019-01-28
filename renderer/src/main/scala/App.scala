@@ -4,14 +4,13 @@ import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global
 import gfx.Screen
 import input.Keyboard
-import facades.three.{Scene, LoadingManager, OrthographicCamera}
+import facades.three.LoadingManager
 import org.scalajs.dom.{document, window}
 
 /**
  * App
  */
 class App() {
-  val screen = Screen.init()
   val manager = new LoadingManager()
   var fps = 0
   var debug = false
@@ -22,7 +21,7 @@ class App() {
   def onKeyDown(keyCode: Int): Unit = {
     keyCode match {
       case 114 => debug = !debug
-      case _ =>
+      case _ => ()
     }
   }
   /**
@@ -36,7 +35,11 @@ class App() {
    * Render app
    */
   def render(): Unit = {
-    screen.render()
+    Screen.clear()
+    if(debug) {
+      println(fps)
+      Screen.fillTextTopRight("fps: " + fps, 10, 10)
+    }
   }
   /**
    * Game loop
@@ -58,6 +61,7 @@ class App() {
    * Start container
    */
   def start(): Unit = {
+    Screen.resize()
     Keyboard.onKeyDown(onKeyDown)
     loop(js.Date.now().toLong)()
   }

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'VT323';
-    src: url('../font/VT323.ttf');
+    src: url('../asset/font/VT323.ttf');
 }
 
 body {
@@ -8,4 +8,25 @@ body {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+}
+
+.container {
+  position: relative;
+  height:100%;
+  width:100%;
+}
+
+#canvas {
+  height:100%;
+  width:100%;
+  background-color: #000;
+}
+
+#text {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  height:100%;
+  width:100%;
 }
