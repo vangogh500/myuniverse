@@ -4,14 +4,13 @@ import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global
 import gfx.Screen
 import input.Keyboard
-import facades.three.LoadingManager
 import org.scalajs.dom.{document, window}
+import com.github.vangogh500.myuni.core.facades.nodejs.FS
 
 /**
  * App
  */
 class App() {
-  val manager = new LoadingManager()
   var fps = 0
   var debug = false
   /**

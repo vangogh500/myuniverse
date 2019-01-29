@@ -7,7 +7,7 @@ package gfx
 
 import org.scalajs.dom.{document, window}
 import org.scalajs.dom.CanvasRenderingContext2D
-import org.scalajs.dom.raw.WebGLRenderingContext
+import org.scalajs.dom.raw.{WebGLRenderingContext, HTMLImageElement}
 import org.scalajs.dom.html.{Canvas}
 
 /**
@@ -37,5 +37,8 @@ object Screen {
     ctx.textBaseline = "top"
     ctx.fillStyle = "white"
     ctx.font = "24px VT323"
+  }
+  def drawImage(img: HTMLImageElement, dx: Int, dy: Int): Unit = {
+    ctx.drawImage(img, dx, dy)
   }
 }
