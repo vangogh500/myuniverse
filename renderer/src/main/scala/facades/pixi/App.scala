@@ -11,6 +11,7 @@ import scala.scalajs.js.annotation.JSImport
 import org.scalajs.dom.{document, window}
 import org.scalajs.dom.html.{Canvas}
 import ticker.Ticker
+import loaders.Loader
 
 
 /**
@@ -23,6 +24,7 @@ class App(width: Double, height: Double) extends js.Object {
   def stage: Container = js.native
   def screen: Rectangle = js.native
   def ticker: Ticker = js.native
+  def loader: Loader = js.native
 }
 
 object App {

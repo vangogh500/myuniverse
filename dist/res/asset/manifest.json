@@ -3,7 +3,8 @@
     {
       "name": "test",
       "imgs": [
-        "salesman1.svg"
+        "salesman1.svg",
+        "salesman2.svg"
       ]
     }
   ]

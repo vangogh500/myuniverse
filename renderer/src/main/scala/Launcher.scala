@@ -1,52 +1,48 @@
 package com.github.vangogh500.myuni.renderer
 
+import scala.concurrent.ExecutionContext
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global
 import facades.pixi.{Text, App => PIXI}
 import input.Keyboard
+import components.{Debugger, AssetLoader}
+import facades.pixi.loaders.Loader
 
 /**
  * Launcher
  */
-class Launcher(pixi: PIXI) {
+class Launcher(pixi: PIXI)(implicit ec: ExecutionContext) {
   var debug = false
-  val view = {
-    val txt = Text("FPS: 0", "VT323", 0xFFFFFF)
-    txt.anchor.set(1,0)
-    txt.x = pixi.screen.width - 10
-    txt.y = 10
-    txt
-  }
-
-  def toggleDebug(): Unit = debug match {
-    case true =>
-      pixi.stage.removeChild(view)
-      debug = false
-    case false =>
-      pixi.stage.addChild(view)
-      debug = true
+  val debugger = new Debugger(pixi)
+  val loader = {
+    val manager = new AssetLoader(pixi)
+    manager.mount()
+    manager.add("test")
+    manager.load().foreach(Unit => {
+      println("test")
+    })
+    manager
   }
   /**
    * Keydown event
    * @param keyCode key code
    */
   def onKeyDown(keyCode: Int): Unit = {
-    keyCode match {
-      case 114 => toggleDebug()
-      case _ => ()
-    }
+    debugger.onKeyDown(keyCode)
+    loader.onKeyDown(keyCode)
   }
   /**
    * Update state
    * @param dt Change in time
    */
   def update(dt: Double): Unit = {
-    view.text = s"FPS: ${pixi.ticker.FPS.toInt}"
+    debugger.update(dt)
+    loader.update(dt)
   }
 }
 
 object Launcher {
-  def init(): Launcher = {
+  def init()(implicit ec: ExecutionContext): Launcher = {
     val pixi = PIXI.init()
     val launcher = new Launcher(pixi)
     pixi.ticker.add(delta => launcher.update(delta))
