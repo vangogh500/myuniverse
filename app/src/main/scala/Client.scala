@@ -23,7 +23,7 @@ object Client {
           width = config.screen.resolution.width,
           height = config.screen.resolution.height,
           frame = false,
-          show = true
+          show = false
         )
         win.loadFile("./res/index.html")
         win.on("ready-to-show", () => win.show())

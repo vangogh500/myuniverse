@@ -19,7 +19,7 @@ class Launcher(pixi: PIXI)(implicit ec: ExecutionContext) {
     manager.mount()
     manager.add("test")
     manager.load().foreach(Unit => {
-      println("test")
+      manager.unmount()
     })
     manager
   }
