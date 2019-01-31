@@ -1,11 +1,11 @@
 package com.github.vangogh500.myuni.renderer
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import com.github.vangogh500.myuni.core.facades.electron.{App => ElectronApp}
+import facades.pixi.{App => PIXI}
 
 
 object Main {
   def main(args: Array[String]): Unit = {
-    new App().start()
+    Launcher.init()
   }
 }

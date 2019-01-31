@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "main": "./app.js",
   "dependencies": {
-    "three": "^0.100.0"
+    "pixi.js": "^4.8.5"
   }
 }
